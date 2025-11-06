@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 650px;
+  margin: 30px auto;
+  background: #f6f6f6;
+  padding: 20px;
+  border-radius: 10px;
+}
+h1, h2, h3, h4 {
+  text-align: center;
+}
+input, select {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+button {
+  margin: 5px;
+  padding: 8px 12px;
+}
+pre {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}

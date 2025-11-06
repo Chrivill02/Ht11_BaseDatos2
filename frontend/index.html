@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hoja 11 - NoSQL (CRUD completo)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Gestión de Base de Datos NoSQL</h1>
+
+  <label>Selecciona colección:</label>
+  <select id="coleccion">
+    <option value="encargado">Encargado</option>
+    <option value="proyecto">Proyecto</option>
+    <option value="familia">Familia Beneficiada</option>
+  </select>
+
+  <div id="formulario"></div>
+
+  <button onclick="insertar()">Insertar</button>
+  <button onclick="mostrar()">Mostrar</button>
+  <button onclick="buscar()">Buscar</button>
+  <button onclick="actualizar()">Actualizar</button>
+
+  <h3>Buscar / Actualizar por ID</h3>
+  <input id="idBuscar" placeholder="Ingrese ID del documento">
+
+  <h2>Resultados</h2>
+  <pre id="resultado"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
