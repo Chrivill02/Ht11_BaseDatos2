@@ -6,47 +6,114 @@ const resultado = document.getElementById("resultado");
 coleccion.addEventListener("change", actualizarFormulario);
 actualizarFormulario();
 
-// 🔹 Cambia el formulario dependiendo de la colección
+// 🔹 Cambia el formulario dependiendo de la colección seleccionada
 function actualizarFormulario() {
   const tipo = coleccion.value;
 
   if (tipo === "encargado") {
     formulario.innerHTML = `
       <h3>Encargado</h3>
-      <input id="nombre" placeholder="Nombre">
-      <input id="direccion" placeholder="Dirección">
-      <input id="dpi" placeholder="DPI">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input id="nombre" placeholder="Nombre">
+      </div>
+      <div class="form-group">
+        <label>Dirección</label>
+        <input id="direccion" placeholder="Dirección">
+      </div>
+      <div class="form-group">
+        <label>DPI</label>
+        <input id="dpi" placeholder="DPI">
+      </div>
     `;
   } 
+  
   else if (tipo === "proyecto") {
     formulario.innerHTML = `
       <h3>Proyecto</h3>
-      <input id="nombre" placeholder="Nombre del Proyecto">
-      <input id="fechaInicio" type="date">
-      <input id="fechaFin" type="date">
-      <input id="presupuesto" type="number" placeholder="Presupuesto">
-      <label>Finalizado:</label>
-      <select id="finalizado">
-        <option value="false">No</option>
-        <option value="true">Sí</option>
-      </select>
-      <input id="encargado" placeholder="ID del Encargado (opcional)">
+      <div class="form-group">
+        <label>Nombre del Proyecto</label>
+        <input id="nombre" placeholder="Nombre del Proyecto">
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Inicio</label>
+        <input id="fechaInicio" type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de Finalización</label>
+        <input id="fechaFin" type="date">
+      </div>
+
+      <div class="form-group">
+        <label>Presupuesto</label>
+        <input id="presupuesto" type="number" placeholder="Presupuesto">
+      </div>
+
+      <div class="form-group">
+        <label>Finalizado</label>
+        <select id="finalizado">
+          <option value="false">No</option>
+          <option value="true">Sí</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>ID del Encargado (opcional)</label>
+        <input id="encargado" placeholder="ID del Encargado">
+      </div>
+
       <h4>Servicio (opcional)</h4>
-      <input id="servicio1" placeholder="Servicio">
-      <input id="precio1" type="number" placeholder="Precio">
-      <input id="cantidad1" type="number" placeholder="Cantidad">
+
+      <div class="form-group">
+        <label>Servicio</label>
+        <input id="servicio1" placeholder="Servicio">
+      </div>
+
+      <div class="form-group">
+        <label>Precio</label>
+        <input id="precio1" type="number" placeholder="Precio">
+      </div>
+
+      <div class="form-group">
+        <label>Cantidad</label>
+        <input id="cantidad1" type="number" placeholder="Cantidad">
+      </div>
     `;
   } 
+  
   else if (tipo === "familia") {
     formulario.innerHTML = `
       <h3>Familia Beneficiada</h3>
-      <input id="direccion" placeholder="Dirección">
-      <input id="ingresoMensual" type="number" placeholder="Ingreso Mensual">
-      <input id="proyecto" placeholder="ID del Proyecto (opcional)">
+      <div class="form-group">
+        <label>Dirección</label>
+        <input id="direccion" placeholder="Dirección">
+      </div>
+
+      <div class="form-group">
+        <label>Ingreso Mensual</label>
+        <input id="ingresoMensual" type="number" placeholder="Ingreso Mensual">
+      </div>
+
+      <div class="form-group">
+        <label>ID del Proyecto (opcional)</label>
+        <input id="proyecto" placeholder="ID del Proyecto">
+      </div>
+
       <h4>Integrante</h4>
-      <input id="nombre1" placeholder="Nombre">
-      <input id="apellido1" placeholder="Apellido">
-      <input id="edad1" type="number" placeholder="Edad">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input id="nombre1" placeholder="Nombre">
+      </div>
+      <div class="form-group">
+        <label>Apellido</label>
+        <input id="apellido1" placeholder="Apellido">
+      </div>
+      <div class="form-group">
+        <label>Edad</label>
+        <input id="edad1" type="number" placeholder="Edad">
+      </div>
     `;
   }
 }
@@ -63,6 +130,7 @@ function obtenerDatosFormulario() {
       dpi: document.getElementById("dpi").value
     };
   } 
+  
   else if (tipo === "proyecto") {
     datos = {
       nombre: document.getElementById("nombre").value,
@@ -80,6 +148,7 @@ function obtenerDatosFormulario() {
       }]
     };
   } 
+  
   else if (tipo === "familia") {
     datos = {
       direccion: document.getElementById("direccion").value,
@@ -96,22 +165,19 @@ function obtenerDatosFormulario() {
   return datos;
 }
 
-// 🔹 Insertar
+// 🔹 Funciones CRUD
 async function insertar() {
   const tipo = coleccion.value;
   const datos = obtenerDatosFormulario();
-
   const res = await fetch(`${urlBase}/${tipo}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datos)
   });
-
   const json = await res.json();
   resultado.textContent = JSON.stringify(json, null, 2);
 }
 
-// 🔹 Mostrar todos
 async function mostrar() {
   const tipo = coleccion.value;
   const res = await fetch(`${urlBase}/${tipo}`);
@@ -119,34 +185,26 @@ async function mostrar() {
   resultado.textContent = JSON.stringify(json, null, 2);
 }
 
-// 🔹 Buscar por ID
 async function buscar() {
   const tipo = coleccion.value;
   const id = document.getElementById("idBuscar").value;
-
   const res = await fetch(`${urlBase}/${tipo}`);
   const todos = await res.json();
   const encontrado = todos.find(item => item._id === id);
-
-  if (encontrado) {
-    resultado.textContent = JSON.stringify(encontrado, null, 2);
-  } else {
-    resultado.textContent = "No se encontró ningún documento con ese ID.";
-  }
+  resultado.textContent = encontrado
+    ? JSON.stringify(encontrado, null, 2)
+    : "No se encontró ningún documento con ese ID.";
 }
 
-// 🔹 Actualizar por ID
 async function actualizar() {
   const tipo = coleccion.value;
   const id = document.getElementById("idBuscar").value;
   const datos = obtenerDatosFormulario();
-
   const res = await fetch(`${urlBase}/${tipo}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datos)
   });
-
   const json = await res.json();
   resultado.textContent = JSON.stringify(json, null, 2);
 }

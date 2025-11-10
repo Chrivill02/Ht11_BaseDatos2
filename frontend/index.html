@@ -2,31 +2,36 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Hoja 11 - NoSQL (CRUD completo)</title>
+  <title>Gestión NoSQL - CRUD Completo</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Gestión de Base de Datos NoSQL</h1>
+  <div class="container">
+    <h1>Gestión de Base de Datos NoSQL</h1>
 
-  <label>Selecciona colección:</label>
-  <select id="coleccion">
-    <option value="encargado">Encargado</option>
-    <option value="proyecto">Proyecto</option>
-    <option value="familia">Familia Beneficiada</option>
-  </select>
+    <label for="coleccion">Selecciona colección:</label>
+    <select id="coleccion">
+      <option value="encargado">Encargado</option>
+      <option value="proyecto">Proyecto</option>
+      <option value="familia">Familia Beneficiada</option>
+    </select>
 
-  <div id="formulario"></div>
+    <div id="formulario"></div>
 
-  <button onclick="insertar()">Insertar</button>
-  <button onclick="mostrar()">Mostrar</button>
-  <button onclick="buscar()">Buscar</button>
-  <button onclick="actualizar()">Actualizar</button>
+    <div style="text-align:center; margin-top:15px;">
+      <button onclick="insertar()">➕ Insertar</button>
+      <button onclick="mostrar()">📋 Mostrar</button>
+      <button onclick="buscar()">🔍 Buscar</button>
+      <button onclick="actualizar()">🛠️ Actualizar</button>
+    </div>
 
-  <h3>Buscar / Actualizar por ID</h3>
-  <input id="idBuscar" placeholder="Ingrese ID del documento">
+    <h3>Buscar / Actualizar por ID</h3>
+    <input id="idBuscar" placeholder="Ingrese ID del documento">
 
-  <h2>Resultados</h2>
-  <pre id="resultado"></pre>
+    <h2>Resultados</h2>
+    <pre id="resultado">Aquí aparecerán los resultados...</pre>
+  </div>
 
   <script src="script.js"></script>
 </body>
